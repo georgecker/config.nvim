@@ -620,10 +620,16 @@ require('lazy').setup({
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
+
+            -- Enable inlay hints by default with a slight delay to ensure proper initialization
+            vim.defer_fn(function()
+              if vim.api.nvim_buf_is_valid(event.buf) then
+                vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+              end
+            end, 300)
           end
         end,
       })
-
       -- Diagnostic Config
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config {
