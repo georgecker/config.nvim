@@ -217,6 +217,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd('ColorScheme', {
+  pattern = '*',
+  callback = function()
+    vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineDevinfo', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineFileinfo', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineInactive', { bg = 'NONE' })
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -911,22 +923,27 @@ require('lazy').setup({
     end,
   },
   {
-    'ellisonleao/gruvbox.nvim',
+    'folke/tokyonight.nvim',
+    lazy = false,
     priority = 1000,
     config = function()
-      require('gruvbox').setup {
-        contrast = 'hard',
-        dim_inactive = false,
-        transparent_mode = true,
-        italic = {
-          strings = false,
-          emphasis = false,
-          comments = true,
-          operators = false,
-          folds = false,
+      require('tokyonight').setup {
+        transparent = true,
+        style = 'storm',
+        styles = {
+          -- Style to be applied to different syntax groups
+          -- Value is any valid attr-list value for `:help nvim_set_hl`
+          comments = { italic = true, fg = '#8389a5' },
+          keywords = {},
+          functions = {},
+          variables = {},
+          -- Background styles. Can be "dark", "transparent" or "normal"
+          sidebars = 'transparent', -- style for sidebars, see below
+          floats = 'transparent', -- style for floating windows
+          statusline = 'transparent',
         },
       }
-      vim.cmd.colorscheme 'gruvbox'
+      vim.cmd.colorscheme 'tokyonight'
     end,
   },
 
@@ -956,7 +973,10 @@ require('lazy').setup({
       --  and try some other statusline plugin
       local statusline = require 'mini.statusline'
       -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
+      statusline.setup {
+        use_icons = vim.g.have_nerd_font,
+        set_vim_settings = true,
+      }
 
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we set the section for
