@@ -910,16 +910,23 @@ require('lazy').setup({
       }
     end,
   },
-
   {
-    'sainnhe/edge',
-    lazy = false,
+    'ellisonleao/gruvbox.nvim',
     priority = 1000,
     config = function()
-      -- Optionally configure and load the colorscheme
-      -- directly inside the plugin declaration.
-      vim.g.edge_style = 'neon'
-      vim.cmd.colorscheme 'edge'
+      require('gruvbox').setup {
+        contrast = 'hard',
+        dim_inactive = false,
+        transparent_mode = true,
+        italic = {
+          strings = false,
+          emphasis = false,
+          comments = true,
+          operators = false,
+          folds = false,
+        },
+      }
+      vim.cmd.colorscheme 'gruvbox'
     end,
   },
 
