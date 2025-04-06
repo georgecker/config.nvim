@@ -942,6 +942,9 @@ require('lazy').setup({
           floats = 'transparent', -- style for floating windows
           statusline = 'transparent',
         },
+        on_colors = function(colors)
+          colors.fg_gutter = '#8389a5'
+        end,
       }
       vim.cmd.colorscheme 'tokyonight'
     end,
