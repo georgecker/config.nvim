@@ -922,34 +922,50 @@ require('lazy').setup({
       }
     end,
   },
+  -- {
+  --   'folke/tokyonight.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require('tokyonight').setup {
+  --       transparent = true,
+  --       style = 'storm',
+  --       styles = {
+  --         -- Style to be applied to different syntax groups
+  --         -- Value is any valid attr-list value for `:help nvim_set_hl`
+  --         comments = { italic = true, fg = '#8389a5' },
+  --         keywords = {},
+  --         functions = {},
+  --         variables = {},
+  --         -- Background styles. Can be "dark", "transparent" or "normal"
+  --         sidebars = 'transparent', -- style for sidebars, see below
+  --         floats = 'transparent', -- style for floating windows
+  --         statusline = 'transparent',
+  --       },
+  --       on_colors = function(colors)
+  --         colors.fg_gutter = '#8389a5'
+  --       end,
+  --     }
+  --     vim.cmd.colorscheme 'tokyonight'
+  --   end,
+  -- },
   {
-    'folke/tokyonight.nvim',
+    'sainnhe/gruvbox-material',
     lazy = false,
     priority = 1000,
     config = function()
-      require('tokyonight').setup {
-        transparent = true,
-        style = 'storm',
-        styles = {
-          -- Style to be applied to different syntax groups
-          -- Value is any valid attr-list value for `:help nvim_set_hl`
-          comments = { italic = true, fg = '#8389a5' },
-          keywords = {},
-          functions = {},
-          variables = {},
-          -- Background styles. Can be "dark", "transparent" or "normal"
-          sidebars = 'transparent', -- style for sidebars, see below
-          floats = 'transparent', -- style for floating windows
-          statusline = 'transparent',
-        },
-        on_colors = function(colors)
-          colors.fg_gutter = '#8389a5'
-        end,
+      vim.g.gruvbox_material_background = 'hard'
+      vim.g.gruvbox_material_foreground = 'original'
+      vim.g.gruvbox_material_better_performance = 1
+      vim.g.gruvbox_material_transparent_background = 2
+      vim.g.gruvbox_material_sign_column_background = 'none'
+      vim.g.gruvbox_material_ui_contrast = 'high'
+      vim.g.gruvbox_material_colors_override = {
+        bg0 = { '#1d2021', '234' }, -- Even darker background for hard contrast
       }
-      vim.cmd.colorscheme 'tokyonight'
+      vim.cmd.colorscheme 'gruvbox-material'
     end,
   },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
